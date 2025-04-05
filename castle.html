@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oakhaven Keep Under Siege - Interactive 3D Model</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1, h2 {
+            color: #555;
+            text-align: center;
+        }
+        #model-container {
+            width: 80%;
+            max-width: 800px;
+            height: 500px;
+            margin: 20px auto;
+            background-color: #eee; /* Placeholder background */
+            border-radius: 8px;
+            overflow: hidden; /* Prevents potential overflow from the model */
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+        .annotation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .annotation h3 {
+            margin-top: 0;
+            color: #777;
+        }
+    </style>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+</head>
+<body>
+    <h1>Oakhaven Keep Under Siege</h1>
+    <h2>Drag and Drop to Explore the Castle and the Attack</h2>
+
+    <div id="model-container">
+        <model-viewer
+            src="castle.glb"  alt="3D model of Oakhaven Keep under siege"
+            shadow-intensity="1"
+            camera-controls
+            auto-rotate
+            interaction-prompt="true"
+        ></model-viewer>
+    </div>
+
+    <div class="annotation">
+        <h3>Exploring the Siege Camp</h3>
+        <p>Outside the walls, you can see Baron Von Hess's encampment. Observe the tents and supply wagons necessary for a prolonged siege. Can you spot the trebuchet, a powerful siege engine used to bombard the castle walls?</p>
+    </div>
+
+    <div class="annotation">
+        <h3>The Attack on the Outer Bailey</h3>
+        <p>Focus on the outer walls of Oakhaven Keep. Imagine the attackers attempting to scale the wooden palisade using ladders, while defenders rain down arrows from the guard towers. The shield-bearing soldiers would have provided some protection for those placing the ladders.</p>
+    </div>
+
+    <div class="annotation">
+        <h3>Breaching the Main Gate</h3>
+        <p>Examine the main gate and the raised drawbridge. The battering ram, likely sheltered to protect the soldiers pushing it, would have been the primary tool to try and break through the gate. Defenders above would have used murder holes to drop dangerous materials on the attackers.</p>
+    </div>
+
+    <div class="annotation">
+        <h3>Defenses of Oakhaven Keep</h3>
+        <p>Look closely at the castle walls and towers. Notice the arrow slits that allowed defenders to fire upon the attackers while remaining relatively protected. The strong central keep served as a final refuge if the outer defenses were breached.</p>
+    </div>
+
+    <p style="text-align: center; margin-top: 30px; font-size: small; color: #777;">
+        This interactive 3D model showcases the siege and defense of a medieval castle. Drag your mouse or touch the model to rotate, zoom, and pan.
+    </p>
+
+</body>
+</html>
