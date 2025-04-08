@@ -9,46 +9,51 @@
         body {
             font-family: sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0; /* Remove default body padding */
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            padding: 20px; /* Add some padding for better spacing */
+            margin-bottom: 20px; /* Reduced margin */
+            background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a subtle background */
+            width: 100%; /* Make header full width */
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2em; /* Slightly smaller font size */
             color: #D1003A;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Reduced margin */
         }
 
         .introduction {
             max-width: 800px;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            margin-bottom: 20px; /* Reduced margin */
+            padding: 0 20px; /* Add horizontal padding for smaller screens */
+            font-size: 1em; /* Slightly smaller font size */
         }
 
         .model-container {
-            width: 80vw;
-            height: 60vh;
-            max-width: 800px;
-            max-height: 600px;
+            width: 100%; /* Make model container full width */
+            height: 70vh; /* Adjust height as needed, using viewport height */
+            max-width: none; /* Remove max width */
+            max-height: none; /* Remove max height */
             background-color: #e0e0e0;
-            border-radius: 8px;
+            border-radius: 0; /* Remove border radius for full width/height */
             overflow: hidden;
-            margin-bottom: 30px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-grow: 1; /* Allow the model container to grow and take available vertical space */
         }
 
         model-viewer {
@@ -63,8 +68,8 @@
             left: 10px;
             z-index: 10;
             display: grid;
-            grid-template-columns: repeat(3, 40px);
-            grid-template-rows: repeat(2, 40px);
+            grid-template-columns: repeat(3, 35px); /* Slightly smaller buttons */
+            grid-template-rows: repeat(2, 35px); /* Slightly smaller buttons */
             gap: 5px;
             align-items: center;
             justify-items: center;
@@ -78,11 +83,12 @@
             height: 100%;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 0.9em; /* Slightly smaller font size */
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background-color 0.3s ease;
+            padding: 0; /* Remove default button padding */
         }
 
         .control-button:hover {
@@ -92,10 +98,12 @@
         footer {
             text-align: center;
             margin-top: 20px;
-            padding-top: 10px;
+            padding: 10px 0; /* Adjust padding */
             border-top: 1px solid #ccc;
-            font-size: 0.9em;
+            font-size: 0.8em; /* Smaller font size */
             color: #777;
+            width: 100%; /* Make footer full width */
+            background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a subtle background */
         }
     </style>
 </head>
@@ -122,11 +130,11 @@
         ></model-viewer>
         <div class="controls">
             <button class="control-button" onclick="rotate(-5, 0)">←</button>
-            <button class="control-button" onclick="zoom(0.9)">+</button>
-            <button class="control-button" onclick="rotate(5, 0)">→</button>
             <button class="control-button" onclick="rotate(0, 5)">↑</button>
-            <button class="control-button" onclick="zoom(1.1)">-</button>
+            <button class="control-button" onclick="rotate(5, 0)">→</button>
             <button class="control-button" onclick="rotate(0, -5)">↓</button>
+            <button class="control-button" onclick="zoom(0.9)">+</button>
+            <button class="control-button" onclick="zoom(1.1)">-</button>
         </div>
     </section>
 
