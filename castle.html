@@ -5,16 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curtis Wong - Medieval Castle Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-    <style>
-        body { margin: 0; }
-        model-viewer {
-            width: 100vw;
-            height: 100vh;
-            background-color: #eee;
-        }
-    </style>
     <style>
         :root {
             --primary-red: #D1003A;
@@ -24,7 +15,7 @@
             --light-gray: #E3E2DF;
             --accent-color: #9A1750;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -77,11 +68,14 @@
             height: 70vh;
             background-color: rgba(209, 0, 58, 0.05);
             overflow: hidden;
+            display: flex; /* Center the model-viewer */
+            justify-content: center;
+            align-items: center;
         }
 
         model-viewer {
-            width: 100%;
-            height: 100%;
+            width: 80%; /* Adjust as needed */
+            height: 80%; /* Adjust as needed */
             --poster-color: transparent;
         }
 
@@ -187,29 +181,34 @@
             .model-section {
                 height: 50vh;
             }
-            
+
             .text-content {
                 padding: 2rem 1.5rem;
             }
-            
+
             h1 {
                 font-size: 2.5rem;
             }
-            
+
             .description {
                 font-size: 1rem;
             }
-            
+
             .controls {
                 left: 1rem;
                 bottom: 1rem;
             }
-            
+
             .scroll-indicator {
                 right: 1rem;
                 bottom: 1rem;
                 padding: 0.75rem;
                 font-size: 0.7rem;
+            }
+
+            model-viewer {
+                width: 100%;
+                height: 100%;
             }
         }
     </style>
@@ -226,26 +225,11 @@
                     <rect x="10" y="70" width="25" height="25" fill="#D1003A"/>
                 </svg>
             </div>
-            <div class="header-text">Curtis Wong - Year 8 History Project</div>
+            <div class="header-text">Curtis Wong - Year 8 History Project: Medieval Castle 3D Model</div>
         </header>
-        
+
         <div class="main-content">
             <div class="model-section">
-                <!-- Placeholder for the 3D model viewer -->
-                <div style="position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f5f5f5; border-radius: 8px; overflow: hidden;">
-                    <img src="/api/placeholder/800/600" alt="Placeholder for 3D Castle Model" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;" />
-                    
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: rgba(209, 0, 58, 0.2);">
-                        <div style="background-color: rgba(255, 255, 255, 0.9); padding: 20px 30px; border-radius: 8px; text-align: center; max-width: 80%;">
-                            <h3 style="margin-top: 0; color: #D1003A;">3D Castle Model Viewer</h3>
-                            <p style="margin-bottom: 0;">The interactive 3D model of the medieval castle will appear here.<br>Users will be able to rotate, zoom, and explore the detailed castle structure.</p>
-                        </div>
-                    </div>
-                </div>
-                <model-viewer src="castle.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="poster.webp" shadow-intensity="1"></model-viewer>
-
-                <!-- Note: In actual implementation, replace this placeholder with: -->
-                <!-- 
                 <model-viewer
                     src="castle.glb"
                     alt="3D model of a Medieval Castle"
@@ -255,10 +239,7 @@
                     interaction-prompt="true"
                     ar
                     ar-modes="webxr scene-viewer quick-look"
-                >
-                </model-viewer>
-                -->
-                
+                ></model-viewer>
                 <div class="controls">
                     <button class="control-button" onclick="document.querySelector('model-viewer').cameraOrbit = '0deg 75deg 2m'">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -279,13 +260,12 @@
                         </svg>
                     </button>
                 </div>
-                
                 <div class="scroll-indicator">
                     <span>ROTATE</span>
                     <span>TO EXPLORE</span>
                 </div>
             </div>
-            
+
             <div class="text-content">
                 <h1>Medieval Castle</h1>
                 <p class="description">
@@ -303,7 +283,7 @@
                 </button>
             </div>
         </div>
-        
+
         <footer>
             &copy; 2025 Curtis Wong. All rights reserved.
         </footer>
