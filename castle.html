@@ -45,12 +45,40 @@
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         model-viewer {
             width: 100%;
             height: 100%;
             --poster-color: transparent;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-button {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #555;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .control-button:hover {
+            background-color: rgba(255, 255, 255, 1);
         }
 
         footer {
@@ -74,6 +102,7 @@
 
     <section class="model-container">
         <model-viewer
+            id="castleModel"
             src="castle.glb"
             alt="3D model of a Medieval Castle"
             shadow-intensity="1"
@@ -83,10 +112,32 @@
             ar
             ar-modes="webxr scene-viewer quick-look"
         ></model-viewer>
+        <div class="controls">
+            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '0deg 75deg 2m'">Front View</button>
+            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '90deg 75deg 2m'">Side View</button>
+            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '180deg 75deg 2m'">Back View</button>
+            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '270deg 75deg 2m'">Other Side</button>
+            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = 'top'">Top View</button>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Curtis Wong - Year 8 History Project</p>
+        <p>&copy; 2025 Curtis Wong - Year 8 History Project: Medieval Castle 3D model </p>
     </footer>
+
+    <script>
+        const modelViewer = document.getElementById('castleModel');
+
+        // You can add more complex controls here, for example:
+        // function zoomIn() {
+        //     const orbit = modelViewer.getCameraOrbit();
+        //     modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius * 0.9}m`;
+        // }
+
+        // function zoomOut() {
+        //     const orbit = modelViewer.getCameraOrbit();
+        //     modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius * 1.1}m`;
+        // }
+    </script>
 </body>
 </html>
