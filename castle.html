@@ -3,82 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oakhaven Keep Under Siege - Interactive 3D Model</title>
+    <title>Curtis Wong - Medieval Castle Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
+        :root {
+            --primary-red: #D1003A;
+            --dark-red: #5D001E;
+            --light-pink: #E3AFBC;
+            --dark-gray: #333333;
+            --light-gray: #E3E2DF;
+            --accent-color: #9A1750;
+        }
+        
         body {
-            font-family: sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.7;
+            overflow-x: hidden;
         }
-        h1, h2 {
-            color: #555;
-            text-align: center;
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        #model-container {
-            width: 80%;
-            max-width: 800px;
-            height: 500px;
-            margin: 20px auto;
-            background-color: #eee; /* Placeholder background */
-            border-radius: 8px;
-            overflow: hidden; /* Prevents potential overflow from the model */
+
+        header {
+            background-color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 10;
         }
+
+        .logo {
+            width: 50px;
+        }
+
+        .logo svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .header-text {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .model-section {
+            flex: 1;
+            position: relative;
+            height: 70vh;
+            background-color: rgba(209, 0, 58, 0.05);
+            overflow: hidden;
+        }
+
         model-viewer {
             width: 100%;
             height: 100%;
+            --poster-color: transparent;
         }
-        .annotation {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+
+        .text-content {
+            background-color: white;
+            padding: 3rem;
+            text-align: center;
         }
-        .annotation h3 {
-            margin-top: 0;
-            color: #777;
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin: 0;
+            color: var(--primary-red);
+            text-transform: uppercase;
+        }
+
+        .description {
+            max-width: 800px;
+            margin: 1.5rem auto;
+            font-size: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            background-color: var(--primary-red);
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button svg {
+            margin-left: 0.5rem;
+            width: 20px;
+            height: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(209, 0, 58, 0.2);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            right: 2rem;
+            bottom: 2rem;
+            background-color: var(--primary-red);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            z-index: 10;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 10;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-button {
+            background-color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .model-section {
+                height: 50vh;
+            }
+            
+            .text-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+            
+            .controls {
+                left: 1rem;
+                bottom: 1rem;
+            }
+            
+            .scroll-indicator {
+                right: 1rem;
+                bottom: 1rem;
+                padding: 0.75rem;
+                font-size: 0.7rem;
+            }
         }
     </style>
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
 </head>
 <body>
-    <h1>Oakhaven Keep Under Siege</h1>
-    <h2>Drag and Drop to Explore the Castle and the Attack</h2>
-
-    <div id="model-container">
-        <model-viewer
-            src="castle.glb"  alt="3D model of Oakhaven Keep under siege"
-            shadow-intensity="1"
-            camera-controls
-            auto-rotate
-            interaction-prompt="true"
-        ></model-viewer>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="25" height="25" fill="#D1003A"/>
+                    <rect x="40" y="10" width="25" height="25" fill="#D1003A"/>
+                    <rect x="70" y="10" width="25" height="25" fill="#D1003A"/>
+                    <rect x="10" y="40" width="25" height="25" fill="#D1003A"/>
+                    <rect x="10" y="70" width="25" height="25" fill="#D1003A"/>
+                </svg>
+            </div>
+            <div class="header-text">Curtis Wong - Year 8 History Project</div>
+        </header>
+        
+        <div class="main-content">
+            <div class="model-section">
+                <model-viewer
+                    src="castle.glb"
+                    alt="3D model of a Medieval Castle"
+                    shadow-intensity="1"
+                    camera-controls
+                    auto-rotate
+                    interaction-prompt="true"
+                    ar
+                    ar-modes="webxr scene-viewer quick-look"
+                >
+                </model-viewer>
+                
+                <div class="controls">
+                    <button class="control-button" onclick="document.querySelector('model-viewer').cameraOrbit = '0deg 75deg 2m'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="control-button" onclick="document.querySelector('model-viewer').cameraOrbit = '90deg 75deg 2m'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H15" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 17L15 12L10 7" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 12H3" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="control-button" onclick="document.querySelector('model-viewer').cameraOrbit = '180deg 75deg 2m'">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 9H15V15H9V9Z" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3Z" stroke="#D1003A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <span>ROTATE</span>
+                    <span>TO EXPLORE</span>
+                </div>
+            </div>
+            
+            <div class="text-content">
+                <h1>Medieval Castle</h1>
+                <p class="description">
+                    Step back in time to the fascinating medieval era with Curtis Wong's amazing interactive 3D castle experience!
+                    Dive into a world where you can explore endless rooms and corridors, learn intriguing facts about history,
+                    and have an absolute blast trying your luck with guessing games around knights. It's a fun and engaging
+                    way to immerse yourself in the past!
+                </p>
+                <button class="cta-button">
+                    Start Exploring
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            &copy; 2025 Curtis Wong. All rights reserved.
+        </footer>
     </div>
-
-    <div class="annotation">
-        <h3>Exploring the Siege Camp</h3>
-        <p>Outside the walls, you can see Baron Von Hess's encampment. Observe the tents and supply wagons necessary for a prolonged siege. Can you spot the trebuchet, a powerful siege engine used to bombard the castle walls?</p>
-    </div>
-
-    <div class="annotation">
-        <h3>The Attack on the Outer Bailey</h3>
-        <p>Focus on the outer walls of Oakhaven Keep. Imagine the attackers attempting to scale the wooden palisade using ladders, while defenders rain down arrows from the guard towers. The shield-bearing soldiers would have provided some protection for those placing the ladders.</p>
-    </div>
-
-    <div class="annotation">
-        <h3>Breaching the Main Gate</h3>
-        <p>Examine the main gate and the raised drawbridge. The battering ram, likely sheltered to protect the soldiers pushing it, would have been the primary tool to try and break through the gate. Defenders above would have used murder holes to drop dangerous materials on the attackers.</p>
-    </div>
-
-    <div class="annotation">
-        <h3>Defenses of Oakhaven Keep</h3>
-        <p>Look closely at the castle walls and towers. Notice the arrow slits that allowed defenders to fire upon the attackers while remaining relatively protected. The strong central keep served as a final refuge if the outer defenses were breached.</p>
-    </div>
-
-    <p style="text-align: center; margin-top: 30px; font-size: small; color: #777;">
-        This interactive 3D model showcases the siege and defense of a medieval castle. Drag your mouse or touch the model to rotate, zoom, and pan.
-    </p>
-
 </body>
 </html>
