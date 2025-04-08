@@ -62,18 +62,26 @@
             bottom: 10px;
             left: 10px;
             z-index: 10;
-            display: flex;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 40px);
+            grid-template-rows: repeat(2, 40px);
+            gap: 5px;
+            align-items: center;
+            justify-items: center;
         }
 
         .control-button {
             background-color: rgba(255, 255, 255, 0.8);
             color: #555;
             border: none;
-            padding: 8px 12px;
+            width: 100%;
+            height: 100%;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: background-color 0.3s ease;
         }
 
@@ -113,31 +121,45 @@
             ar-modes="webxr scene-viewer quick-look"
         ></model-viewer>
         <div class="controls">
-            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '0deg 75deg 2m'">Front View</button>
-            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '90deg 75deg 2m'">Side View</button>
-            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '180deg 75deg 2m'">Back View</button>
-            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = '270deg 75deg 2m'">Other Side</button>
-            <button class="control-button" onclick="document.getElementById('castleModel').cameraOrbit = 'top'">Top View</button>
+            <button class="control-button" onclick="rotate(-5, 0)">←</button>
+            <button class="control-button" onclick="zoom(0.9)">+</button>
+            <button class="control-button" onclick="rotate(5, 0)">→</button>
+            <button class="control-button" onclick="rotate(0, 5)">↑</button>
+            <button class="control-button" onclick="zoom(1.1)">-</button>
+            <button class="control-button" onclick="rotate(0, -5)">↓</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Curtis Wong - Year 8 History Project: Medieval Castle 3D model </p>
+        <p>&copy; 2025 Curtis Wong - Year 8 History Project</p>
     </footer>
 
     <script>
         const modelViewer = document.getElementById('castleModel');
+        let currentOrbit = { theta: 0, phi: 75, radius: 2 }; // Initial orbit values
 
-        // You can add more complex controls here, for example:
-        // function zoomIn() {
-        //     const orbit = modelViewer.getCameraOrbit();
-        //     modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius * 0.9}m`;
-        // }
+        function updateOrbit() {
+            modelViewer.cameraOrbit = `${currentOrbit.theta}deg ${currentOrbit.phi}deg ${currentOrbit.radius}m`;
+        }
 
-        // function zoomOut() {
-        //     const orbit = modelViewer.getCameraOrbit();
-        //     modelViewer.cameraOrbit = `${orbit.theta}deg ${orbit.phi}deg ${orbit.radius * 1.1}m`;
-        // }
+        function rotate(deltaTheta, deltaPhi) {
+            currentOrbit.theta += deltaTheta;
+            currentOrbit.phi += deltaPhi;
+            updateOrbit();
+        }
+
+        function zoom(factor) {
+            currentOrbit.radius *= factor;
+            updateOrbit();
+        }
+
+        modelViewer.addEventListener('camera-change', () => {
+            const orbit = modelViewer.getCameraOrbit();
+            const [theta, phi, radius] = orbit.split(' ').map(parseFloat);
+            currentOrbit.theta = theta;
+            currentOrbit.phi = phi;
+            currentOrbit.radius = radius;
+        });
     </script>
 </body>
 </html>
